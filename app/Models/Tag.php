@@ -13,6 +13,6 @@ class Tag extends Model
 
     public function lessons()
     {
-        return $this->belongsToMany(Lesson::class);
+        return $this->belongsToMany(Lesson::class, 'lesson_tags');
     }
 }
