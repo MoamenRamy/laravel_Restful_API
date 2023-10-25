@@ -10,12 +10,17 @@ use App\Http\Resources\Lesson as LessonResource;
 
 class LessonController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except(['index', 'show']);
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $lesson = LessonResource::collection(Lesson::all());
+        $limit = $request->input('limit') <= 50 ? $request->input('limit') : 15;
+        $lesson = LessonResource::collection(Lesson::paginate($limit));
         return $lesson->response()->setStatusCode(200);
     }
 
@@ -42,6 +47,8 @@ class LessonController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $idlesson = Lesson::findOrFail($id);
+        $this->authorize('update', $idlesson);
         $lesson = new LessonResource(Lesson::findOrFail($id));
         $lesson->update($request->all());
 
@@ -53,6 +60,8 @@ class LessonController extends Controller
      */
     public function destroy($id)
     {
+        $idlesson = Lesson::findOrFail($id);
+        $this->authorize('delete', $idlesson);
         Lesson::find($id)->delete();
 
         return 204;

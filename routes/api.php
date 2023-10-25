@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\LessonController;
+use App\Http\Controllers\API\LoginController;
 use App\Http\Controllers\API\RelationshipController;
 use App\Http\Controllers\API\TagController;
 use App\Http\Controllers\API\UserController;
@@ -71,6 +72,8 @@ Route::group(['prefix' => 'v1'], function()
     Route::get('lessons/{id}/tags', [RelationshipController::class, 'lessonTags']);
 
     Route::get('tags/{id}/lessons', [RelationshipController::class, 'tagLessons']);
+
+    Route::get('login', [LoginController::class, 'login'])->name('login');
 });
 
 // Route::domain('{accout}.myapp.com')->group(function(){
