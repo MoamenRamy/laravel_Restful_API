@@ -1,66 +1,143 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel RESTful API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A RESTful API built with Laravel for managing users, lessons, and tags with authentication, authorization, API Resources, pagination, and Eloquent relationships.
 
-## About Laravel
+## 🚀 Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 🔐 Authentication & Authorization
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- API authentication using Laravel Passport
+- HTTP Basic Authentication for API login
+- Personal access token generation
+- Protected API endpoints using authentication middleware
+- Authorization using Laravel Policies
+- Role support for users
+- Public access to selected read-only endpoints
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 📚 Lesson Management
 
-## Learning Laravel
+- Complete CRUD operations for lessons
+- Create new lessons
+- Retrieve all lessons
+- Retrieve a single lesson
+- Update existing lessons
+- Delete lessons
+- Pagination support
+- Configurable pagination limit
+- Maximum pagination limit of 50 records
+- User-to-lesson relationship
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 👤 User Management
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- Complete CRUD operations for users
+- Create users with hashed passwords
+- Retrieve users
+- Retrieve a single user
+- Update users
+- Delete users
+- User-to-lesson relationship
+- Authorization for protected user operations
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 🏷️ Tag Management
 
-## Laravel Sponsors
+- Complete CRUD operations for tags
+- Create tags
+- Retrieve tags
+- Retrieve a single tag
+- Update tags
+- Delete tags
+- Many-to-many relationship with lessons
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### 🔗 Eloquent Relationships
 
-### Premium Partners
+The project demonstrates multiple Eloquent relationships:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+- `User hasMany Lessons`
+- `Lesson belongsTo User`
+- `Lesson belongsToMany Tags`
+- `Tag belongsToMany Lessons`
 
-## Contributing
+### 📦 API Resources
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Laravel API Resources are used to transform Eloquent models into structured JSON responses.
 
-## Code of Conduct
+Resources are available for:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Users
+- Lessons
+- Tags
 
-## Security Vulnerabilities
+### 📄 Pagination
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+The API supports pagination through the `limit` query parameter.
 
-## License
+Example:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+GET /api/v1/lessons?limit=10
+
+The requested limit is restricted to a maximum of 50 records.
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| PHP 8.1+ | Backend programming language |
+| Laravel 10 | Backend framework |
+| Laravel Passport | API authentication and access tokens |
+| Laravel Sanctum | API authentication middleware |
+| Laravel Eloquent | ORM and database relationships |
+| Laravel API Resources | API response transformation |
+| MySQL | Database |
+| PHPUnit | Automated testing |
+| Laravel Sail | Development environment |
+| Laravel Pint | Code formatting |
+| Guzzle | HTTP client |
+
+---
+
+## 🏗️ Project Architecture
+
+```text
+laravel_Restful_API/
+│
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   └── API/
+│   │   │       ├── LessonController.php
+│   │   │       ├── LoginController.php
+│   │   │       ├── RelationshipController.php
+│   │   │       ├── TagController.php
+│   │   │       └── UserController.php
+│   │   │
+│   │   └── Resources/
+│   │       ├── Lesson.php
+│   │       ├── Tag.php
+│   │       └── User.php
+│   │
+│   ├── Models/
+│   │   ├── Lesson.php
+│   │   ├── Tag.php
+│   │   └── User.php
+│   │
+│   └── Policies/
+│
+├── database/
+│   ├── factories/
+│   ├── migrations/
+│   └── seeders/
+│
+├── routes/
+│   ├── api.php
+│   ├── web.php
+│   └── console.php
+│
+├── resources/
+├── tests/
+├── config/
+├── public/
+├── storage/
+├── composer.json
+└── artisan
